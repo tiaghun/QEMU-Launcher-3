@@ -1,0 +1,19 @@
+#!/bin/bash
+cd "${0%/*}"
+open ../../../IMGCreatorStatus.app/ & disown
+
+isRunning=$(cat isRunning)
+while [ "$isRunning" == "true" ]
+do isRunning=$(cat isRunning)
+   IMGName=$(cat targetPath)
+   sleep 0.5
+   IMGName=$(cat targetPath)
+   sizeInBytes=$(wc -c "$IMGName" | awk '{print $1}')
+   sizeInKiloB=$(( $sizeInBytes / 1024 ))
+   sizeInMegaB=$(( $sizeInKiloB / 1024 ))
+   size="$sizeInMegaB"M
+   totalSize=$(cat targetSize)
+   progress="$size"" / ""$totalSize"
+   echo "$progress" > "$PWD"/progress
+   sleep 0.5
+done

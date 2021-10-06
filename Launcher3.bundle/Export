@@ -1,0 +1,8 @@
+#!/bin/zsh
+
+cd "${0%/*}"
+
+ProfName=$(cat profileName)
+ExportDest=$(cat exportDestination)
+
+cp Profiles/$ProfName $ExportDest

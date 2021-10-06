@@ -1,0 +1,75 @@
+#!/bin/bash
+cd "${0%/*}"
+
+Size=$(cat SIZE)
+Name=$(cat NAME)
+Part=$(cat PARTITION)
+FS=$(cat FS)
+Ext=$(cat EXTENSION)
+Path=$(cat PATH)
+
+#Parition Table
+if [ "$Part" == "Apple Partition Map (APM)" ]
+  then Part="SPUD"
+fi
+if [ "$Part" == "GUID Partition Table (GPT)" ]
+  then Part="GPTSPUD"
+fi
+if [ "$Part" == "Master Boot Record (MBR)" ]
+  then Part="MBRSPUD"
+fi
+if [ "$Part" == "CDROM Partition Table (ISOCD)" ]
+  then Part="ISOCD"
+fi
+#End Partition Table
+
+#File System
+if [ "$FS" == "Hierarchal File System (HFS)" ]
+  then FS="HFS"
+fi
+if [ "$FS" == "Hierarchal File System Plus (HFS+)" ]
+  then FS="Case-sensitive Journaled HFS+"
+fi
+if [ "$FS" == "Apple File System (APFS)" ]
+  then FS="APFS"
+fi
+if [ "$FS" == "File Allocation Table (FAT12/16/32)" ]
+  then FS="MS-DOS"
+fi
+if [ "$FS" == "Extended File Allocation Table (ExFAT/FAT64)" ]
+  then FS="ExFAT"
+fi
+if [ "$FS" == "Universal Disk Format (UDF)" ]
+  then FS="UDF"
+fi
+#End File System
+
+#Error Handler
+if [ "$Size" == "" ]
+  then return 1
+fi
+if [ "$Name" == "" ]
+  then return 1
+fi
+if [ "$Part" == "" ]
+  then return 1
+fi
+if [ "$FS" == "" ]
+  then return 1
+fi
+if [ "$Ext" == "" ]
+  then return 1
+fi
+if [ "$Path" == "" ]
+  then return 1
+fi
+#End Error Handler
+
+printf "$Size" > IMGCreatorStatus.app/Contents/Resources/targetSize
+printf "$Path""$Name"".dmg" > IMGCreatorStatus.app/Contents/Resources/targetPath
+printf "true" > IMGCreatorStatus.app/Contents/Resources/isRunning
+IMGCreatorStatus.app/Contents/Resources/StatusGUI & disown
+hdiutil create -type UDIF -layout "$Part" -fs "$FS" -size "$Size" -volname "$Name" "$Path""$Name"
+mv "$Path""$Name".dmg "$Path""$Name""$Ext"
+printf "false" > IMGCreatorStatus.app/Contents/Resources/isRunning
+printf "NULL" > IMGCreatorStatus.app/Contents/Resources/progress

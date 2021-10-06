@@ -1,0 +1,13 @@
+#!/bin/bash
+
+cd "${0%/*}"
+
+printf '' > CurrentSettings/BOOT
+printf '' > CurrentSettings/CDROM
+printf '' > CurrentSettings/CPU
+printf '' > CurrentSettings/FloppyA
+printf '' > CurrentSettings/FloppyB
+printf '' > CurrentSettings/HDD0
+printf '' > CurrentSettings/HDD1
+printf '' > CurrentSettings/NET
+printf '' > CurrentSettings/RAM

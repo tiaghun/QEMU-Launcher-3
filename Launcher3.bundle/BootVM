@@ -1,0 +1,279 @@
+#!/bin/bash
+
+cd "${0%/*}"
+
+Boot=$(cat CurrentSettings/BOOT)
+CDROM=$(cat CurrentSettings/CDROM)
+CPU=$(cat CurrentSettings/CPU)
+FloppyA=$(cat CurrentSettings/FloppyA)
+FloppyB=$(cat CurrentSettings/FloppyB)
+HDD0=$(cat CurrentSettings/HDD0)
+HDD1=$(cat CurrentSettings/HDD1)
+Net=$(cat CurrentSettings/NET)
+RAM=$(cat CurrentSettings/RAM)
+
+#Boot
+if [ "$Boot" == "Floppy Diskette Drive" ]
+  then Boot="-boot a"
+fi
+
+if [ "$Boot" == "CDROM Drive" ]
+  then Boot="-boot d"
+fi
+
+if [ "$Boot" == "Hard Disk Drive" ]
+  then Boot="-boot c"
+fi
+
+if [ "$Boot" == "Network Drive" ]
+  then Boot="-boot n"
+fi
+#End Boot
+
+#CPU
+if [ "$CPU" == "Alpha" ]
+  then CPU="/usr/local/bin/qemu-system-alpha"
+fi
+
+if [ "$CPU" == "ARM" ]
+  then CPU="/usr/local/bin/qemu-system-arm"
+fi
+
+if [ "$CPU" == "ARM64" ]
+  then CPU="/usr/local/bin/qemu-system-aarch64"
+fi
+
+if [ "$CPU" == "CRIS" ]
+  then CPU="/usr/local/bin/qemu-system-cris"
+fi
+
+if [ "$CPU" == "i386" ]
+  then CPU="/usr/local/bin/qemu-system-i386"
+fi
+
+if [ "$CPU" == "LatticeMico32" ]
+  then CPU="/usr/local/bin/qemu-system-lm32"
+fi
+
+if [ "$CPU" == "M68k" ]
+  then CPU="/usr/local/bin/qemu-system-m68k"
+fi
+
+if [ "$CPU" == "MicroBlaze" ]
+  then CPU="/usr/local/bin/qemu-system-microblaze"
+fi
+
+if [ "$CPU" == "MicroBlazeEL" ]
+  then CPU="/usr/local/bin/qemu-system-microblazeel"
+fi
+
+if [ "$CPU" == "MIPS" ]
+  then CPU="/usr/local/bin/qemu-system-mips"
+fi
+
+if [ "$CPU" == "MIPS64" ]
+  then CPU="/usr/local/bin/qemu-system-mips64"
+fi
+
+if [ "$CPU" == "MIPSEL" ]
+  then CPU="/usr/local/bin/qemu-system-mipsel"
+fi
+
+if [ "$CPU" == "MIPSEL64" ]
+  then CPU="/usr/local/bin/qemu-system-mips64el"
+fi
+
+if [ "$CPU" == "Moxie" ]
+  then CPU="/usr/local/bin/qemu-system-moxie"
+fi
+
+if [ "$CPU" == "OpenRISC32" ]
+  then CPU="/usr/local/bin/qemu-system-riscv32"
+fi
+
+if [ "$CPU" == "PowerPC" ]
+  then CPU="/usr/local/bin/qemu-system-ppc"
+fi
+
+if [ "$CPU" == "PowerPC64" ]
+  then CPU="/usr/local/bin/qemu-system-ppc64"
+fi
+
+if [ "$CPU" == "PowerPC EMB" ]
+  then CPU="/usr/local/bin/qemu-system-ppcemb"
+fi
+
+if [ "$CPU" == "S390X" ]
+  then CPU="/usr/local/bin/qemu-system-s390x"
+fi
+
+if [ "$CPU" == "SH4" ]
+  then CPU="/usr/local/bin/qemu-system-sh4"
+fi
+
+if [ "$CPU" == "SH4 EB" ]
+  then CPU="/usr/local/bin/qemu-system-sh4eb"
+fi
+
+if [ "$CPU" == "SPARC" ]
+  then CPU="/usr/local/bin/qemu-system-sparc"
+fi
+
+if [ "$CPU" == "SPARC64" ]
+  then CPU="/usr/local/bin/qemu-system-sparc64"
+fi
+
+if [ "$CPU" == "Unicore32" ]
+  then CPU="/usr/local/bin/qemu-system-unicore32"
+fi
+
+if [ "$CPU" == "x86-64" ]
+  then CPU="/usr/local/bin/qemu-system-x86_64"
+fi
+
+if [ "$CPU" == "Xbox" ]
+  then CPU="/usr/local/bin/qemu-system-xbox"
+fi
+
+if [ "$CPU" == "Xtensa" ]
+  then CPU="/usr/local/bin/qemu-system-xtensa"
+fi
+#End CPU
+
+#Network
+if [ "$Net" == "NE2000 PCI" ]
+  then Net="-net nic,model=ne2k_pci"
+fi
+
+if [ "$Net" == "E1000" ]
+  then Net="-net nic,model=e1000"
+fi
+
+if [ "$Net" == "RTL8139" ]
+  then Net="-net nic,model=rtl8139"
+fi
+
+if [ "$Net" == "PCNET" ]
+  then Net="-net nic,model=pcnet"
+fi
+
+if [ "$Net" == "Virtio" ]
+  then Net="-net nic,model=virtio-net-pci"
+fi
+#End Network
+
+#RAM
+if [ "$RAM" == "64 KB" ]
+  then RAM="-m 64K"
+fi
+
+if [ "$RAM" == "128 KB" ]
+  then RAM="-m 128K"
+fi
+
+if [ "$RAM" == "256 KB" ]
+  then RAM="-m 256K"
+fi
+
+if [ "$RAM" == "512 KB" ]
+  then RAM="-m 512K"
+fi
+
+if [ "$RAM" == "1 MB" ]
+  then RAM="-m 1M"
+fi
+
+if [ "$RAM" == "2 MB" ]
+  then RAM="-m 2M"
+fi
+
+if [ "$RAM" == "4 MB" ]
+  then RAM="-m 4M"
+fi
+
+if [ "$RAM" == "8 MB" ]
+  then RAM="-m 8M"
+fi
+
+if [ "$RAM" == "16 MB" ]
+  then RAM="-m 16M"
+fi
+
+if [ "$RAM" == "32 MB" ]
+  then RAM="-m 32M"
+fi
+
+if [ "$RAM" == "64 MB" ]
+  then RAM="-m 64M"
+fi
+
+if [ "$RAM" == "128 MB" ]
+  then RAM="-m 128M"
+fi
+
+if [ "$RAM" == "256 MB" ]
+  then RAM="-m 256M"
+fi
+
+if [ "$RAM" == "512 MB" ]
+  then RAM="-m 512M"
+fi
+
+if [ "$RAM" == "1 GB" ]
+  then RAM="-m 1G"
+fi
+
+if [ "$RAM" == "2 GB" ]
+  then RAM="-m 2G"
+fi
+
+if [ "$RAM" == "4 GB" ]
+  then RAM="-m 4G"
+fi
+
+if [ "$RAM" == "6 GB" ]
+  then RAM="-m 6G"
+fi
+
+if [ "$RAM" == "8 GB" ]
+  then RAM="-m 8G"
+fi
+
+if [ "$RAM" == "16 GB" ]
+  then RAM="-m 16G"
+fi
+#End RAM
+
+#DiskCheck
+if [ "$FloppyA" == "" ]
+  then P2=""
+  else P2="-fda $FloppyA "
+fi
+
+if [ "$FloppyB" == "" ]
+  then P3=""
+  else P3="-fdb $FloppyB "
+fi
+
+if [ "$HDD0" == "" ]
+  then P4=""
+  else P4="-hda $HDD0 "
+fi
+
+if [ "$HDD1" == "" ]
+  then P5=""
+  else P5="-hdb $HDD1 "
+fi
+
+if [ "$CDROM" == "" ]
+  then P6=""
+  else P6="-cdrom $CDROM "
+fi
+#End DiskCheck
+
+#Launch
+
+P1="$CPU $RAM $Net "
+$P1$P2$P3$P4$P5$P6$Boot
+
+#End Launch

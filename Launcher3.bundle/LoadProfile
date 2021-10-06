@@ -1,0 +1,31 @@
+#!/bin/zsh
+
+cd "${0%/*}"
+
+# Set up environment
+ProfName=$(cat profileName)
+cut -c 7- Profiles/$ProfName > Profiles/tmp
+
+# Load settings into memory
+BOOTD=$(head -1 Profiles/tmp | tail -1)
+CPUAR=$(head -2 Profiles/tmp | tail -1)
+RAMQT=$(head -3 Profiles/tmp | tail -1)
+NETWR=$(head -4 Profiles/tmp | tail -1)
+CDROM=$(head -5 Profiles/tmp | tail -1)
+FLOPA=$(head -6 Profiles/tmp | tail -1)
+FLOPB=$(head -7 Profiles/tmp | tail -1)
+HDD00=$(head -8 Profiles/tmp | tail -1)
+HDD01=$(head -9 Profiles/tmp | tail -1)
+
+# Write settings to CurrentSettings files
+printf $BOOTD > CurrentSettings/BOOT
+printf $CPUAR > CurrentSettings/CPU
+printf $RAMQT > CurrentSettings/RAM
+printf $NETWR > CurrentSettings/NET
+printf $CDROM > CurrentSettings/CDROM
+printf $FLOPA > CurrentSettings/FloppyA
+printf $FLOPB > CurrentSettings/FloppyB
+printf $HDD00 > CurrentSettings/HDD0
+printf $HDD01 > CurrentSettings/HDD1
+
+rm Profiles/tmp

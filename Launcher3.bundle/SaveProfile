@@ -1,0 +1,19 @@
+#!/bin/zsh
+
+# Change to Bundle Resources directory
+cd "${0%/*}"
+
+# Get current settings vars
+BOOTD=$(cat CurrentSettings/BOOT)
+CDROM=$(cat CurrentSettings/CDROM)
+CPUAR=$(cat CurrentSettings/CPU)
+FLOPA=$(cat CurrentSettings/FloppyA)
+FLOPB=$(cat CurrentSettings/FloppyB)
+HDD00=$(cat CurrentSettings/HDD0)
+HDD01=$(cat CurrentSettings/HDD1)
+NETWR=$(cat CurrentSettings/NET)
+RAMQT=$(cat CurrentSettings/RAM)
+
+# Save Profile
+ProfName=$(cat profileName)
+printf "BOOTD:"$BOOTD"\n""CPUAR:"$CPUAR"\n""RAMQT:"$RAMQT"\n""NETWR:"$NETWR"\n""CDROM:"$CDROM"\n""FLOPA:"$FLOPA"\n""FLOPB:"$FLOPB"\n""HDD00:"$HDD00"\n""HDD01:"$HDD01"\n""ENDFILE" > Profiles/$ProfName
